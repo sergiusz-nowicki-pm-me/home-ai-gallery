@@ -4,45 +4,27 @@ import json
 import os
 import sqlite3
 from PIL import Image
+from src.JsonFile import JsonFile
 
 METADATA_FILE_NAME = '.home-ai-gallery-metadata'
 
-class JsonFile:
-    def __init__(self, path, default={}):
-        self.path = path
-        self.default = default
-        
-    def load(self):
-        if not os.path.exists(self.path):
-            self.save(self.default)
-            
-        with open(self.path, 'r') as file:
-            data = json.load(file)
-        return data
-
-    def save(self, data):
-        with open(self.path, 'w') as file:
-            json.dump(data, file, sort_keys=True, indent=4)
-
-
-class Configuration(JsonFile):
-    def __init__(self, path):
-        super(path, {"dirs": []})
-        
         
 class BaseDirectory:
     METADATA_FILE_NAME = '.home-ai-gallery-metadata'
     
+
     def __init__(self, path):
         self.path = path
         self.metadata_file_path = os.path.join(self.path, self.METADATA_FILE_NAME)
         self.json_file = JsonFile(self.metadata_file_path)
         
         self.metadata = self.json_file.load()
-        
+
+
     def get_metadata(self):
         return copy.deepcopy(self.metadata)
     
+
     def get_files(self):
         all_files = []
         for root, dirs, files in os.walk(self.path):
@@ -52,18 +34,21 @@ class BaseDirectory:
                     all_files.append(file_path)
         return all_files
     
+
     def get_files_without_metadata(self):
         metadata_keys = self.metadata.keys()
         return [path for path in self.get_files() if path not in metadata_keys]
     
+
     def get_path(self):
         return self.path
     
+
     def set_metadata(self, data):
         self.metadata = data
         self.json_file.save(data)
 
-        
+     
 
 class Gallery:
     def __init__(self):
@@ -73,13 +58,14 @@ class Gallery:
 
         self.initialize()
 
+
     def initialize(self):        
         print('Loading configuration file')
         config = self.config_file.load()
         print('Found', len(config['dirs']), 'base directories')
         
         for base_dir_path in config['dirs']:
-            self.base_directories.append(BaseDirectory(base_dir_path))
+            self.base_directories.append(BaseDirectory(os.path.abspath(base_dir_path)))
         
         print('Loading existing metadata')
         for base_dir in self.base_directories:
@@ -115,9 +101,8 @@ class Gallery:
             base_dir.set_metadata(new_directory_metadata)
         
         print(f'Loaded {len(self.metadata)} metadata entries')
-        
-        
-        
+    
+    
     def calculate_checksum(self, file_path, algorithm='sha512'):
         hash_func = hashlib.new(algorithm)
         with open(file_path, "rb") as f:
