@@ -4,6 +4,7 @@ import json
 import os
 import sqlite3
 from PIL import Image
+from src.ImageFile import ImageFile
 from src.JsonFile import JsonFile
 
 METADATA_FILE_NAME = '.home-ai-gallery-metadata'
@@ -58,6 +59,9 @@ class Gallery:
 
         self.initialize()
 
+        config = self.config_file.load()
+        self.files = [ImageFile(m, self.metadata[m]['base_directory_path'], config) for m in self.metadata.keys()]
+
 
     def initialize(self):        
         print('Loading configuration file')
@@ -109,3 +113,7 @@ class Gallery:
             while chunk := f.read(4096):  # Read the file in chunks to avoid memory issues
                 hash_func.update(chunk)
         return hash_func.hexdigest()
+
+
+    def search_images(self, search_conditions):
+        return self.files
