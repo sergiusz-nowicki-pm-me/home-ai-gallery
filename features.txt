@@ -1,0 +1,16 @@
+Pełna wymuszona obsługa tagowania (każdy obraz ma mieć wskazaną obecność bądź nieobecność każdego taga).
+W przypadku dodania tagu te obrazy które nie zostaną ztagowane automatychnie muszą być sklasyfikowane.
+Tagowanie wielopoziomowe (tagi do tagów, np. tag las ma zawierać również tag na zewnątrz, tag poni zawiera tag zwierze ...)
+Kategorie tagów - przed tagowaniem wybieramy kategorie które mają być dodane (np. jeżeli obraz zawiera tylko przyrodę to nie pytamy o tagi dotyczące zwierząt i ludzi)
+Każda kategoria jest klasyfikowana oddzielnie. Wyświetlamy tagi z kategorii i każemy wskazać obecność/nieobecność
+Typy tagów: kategoria
+
+    - tagowanie bezpośrednie i pośrednie:
+        - jak wskażemy tag pies to otagujemy bezpośrednio tym tagiem obraz, a pośrednio tagiem nie zwierze (nie wymuszać wtedy tagowania),
+        - jak usuwamy tagowanie bezpośredni to usuwamy również wszystkie pośrednie
+    - najpierw wymuszać tagowanie tagami zawierającymi najwięcej innych tagów
+
+Oznaczenie tagów stanowiących elementy ścieżki. (pliki są przesówane do określonej lokalizacji wewnątrz katalogu bazowego po otagowaniu tagiem).
+Obsługa wielu katalogów bazowych na raz (obrazy mogą być na różnych dyskach) z możliwością przesówania.
+Metadane zapisywane w katalogu bazowym, w którym znajduje się obraz i przenoszone razem z obrazem w razie przesunięcia.
+    - metadane mają zawierać skrót np. md5 do identyfikacji dubli, albo wykrycia nieautoryzowanego przesunięcia plików
