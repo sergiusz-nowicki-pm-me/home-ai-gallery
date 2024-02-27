@@ -12,10 +12,10 @@ def hello_world():
 
 
 @app.route('/image-preview/<path:filepath>')
-def images(filepath):
+def image_preview(filepath):
     return send_from_directory(os.path.dirname(filepath), os.path.basename(filepath))
 
 
 @app.route('/image/<path:filepath>')
-def images(filepath):
+def image(filepath):
     return send_from_directory(os.path.dirname(filepath), os.path.basename(filepath))

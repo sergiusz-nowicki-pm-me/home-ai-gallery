@@ -60,7 +60,7 @@ class Gallery:
         self.initialize()
 
         config = self.config_file.load()
-        self.files = [ImageFile(m, self.metadata[m]['base_directory_path'], config) for m in self.metadata.keys()]
+        self.files = [ImageFile(m, self.metadata[m]['base_directory_path'], config) for m in self.metadata.keys() if self.metadata[m]['type'] == 'image']
 
 
     def initialize(self):        
