@@ -9,7 +9,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    return '<br/>'.join([f.get_name() + f.get_preview() for f in gallery.search_images("*")])
+    entries = gallery.get_entries("*")
+    print(entries)
+    return '<br/>'.join([f.get_name() + f'<img src="/image/${f.get_path()}' for f in entries])
 
 
 @app.route('/image-preview/<path:filepath>')

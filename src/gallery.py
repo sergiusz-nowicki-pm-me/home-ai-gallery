@@ -7,9 +7,10 @@ from src.json_file import JsonFile
 #   2. Configuration API
 class Gallery:
     def __init__(self, conf_file_path):
+        print(f'Loading gallery {conf_file_path}')
         self.conf_file = JsonFile(conf_file_path, {"dirs": []})
         self.branches = []
-        for path in self.conf_file.load()['dirs']:
+        for path in self.conf_file.get_data()['dirs']:
             self.branches.append(GalleryBranch(path))
         
         

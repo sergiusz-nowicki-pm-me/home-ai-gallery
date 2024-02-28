@@ -5,6 +5,7 @@ from src.album import Album
 
 class GalleryBranch:
     def __init__(self, base_path):
+        print(f'Loading branch {base_path}')
         self.base_path = base_path
         self.albums = []
         self.__load_albums(self.base_path)
@@ -12,7 +13,8 @@ class GalleryBranch:
         
     def __load_albums(self, path):
         is_album = False
-        for new_path in os.path.listdir(self.base_path):
+        for p in os.listdir(path):
+            new_path = os.path.join(path, p)
             if os.path.isdir(new_path):
                 self.__load_albums(new_path)
             else:
