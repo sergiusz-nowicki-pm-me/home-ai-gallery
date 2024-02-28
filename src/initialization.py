@@ -5,11 +5,12 @@ import os
 import sqlite3
 from PIL import Image
 from src.ImageFile import ImageFile
-from src.JsonFile import JsonFile
+from src.json_file import JsonFile
+
 
 METADATA_FILE_NAME = '.home-ai-gallery-metadata'
 
-        
+
 class BaseDirectory:
     METADATA_FILE_NAME = '.home-ai-gallery-metadata'
     

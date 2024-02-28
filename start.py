@@ -1,10 +1,11 @@
 import os
 from flask import Flask, send_from_directory
-from src.initialization import Gallery
+from src.gallery import Gallery
 
-gallery = Gallery()
 
+gallery = Gallery('./config/conf.json')
 app = Flask(__name__)
+
 
 @app.route("/")
 def hello_world():
