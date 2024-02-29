@@ -11,7 +11,7 @@ app = Flask(__name__)
 def hello_world():
     entries = gallery.get_entries("*")
     print(entries)
-    return render_template('simple-flow-gallery.html', entries=entries)
+    return render_template('column-gallery.html', entries=entries)
 
 
 @app.route('/image-preview/<path:filepath>')
