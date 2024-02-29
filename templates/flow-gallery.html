@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+
+{% block gallery %}
+    <div style="display: flex; flex-wrap: wrap;">
+        {% for entry in entries %}
+            {% block entry_view scoped %}{{entry}}{% endblock %}
+        {% endfor %}
+    </div>
+{% endblock %}

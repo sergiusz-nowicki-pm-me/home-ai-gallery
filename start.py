@@ -1,5 +1,5 @@
 import os
-from flask import Flask, send_from_directory
+from flask import Flask, render_template, send_from_directory
 from src.gallery import Gallery
 
 
@@ -11,7 +11,7 @@ app = Flask(__name__)
 def hello_world():
     entries = gallery.get_entries("*")
     print(entries)
-    return '<br/>'.join([f.get_name() + f'<img src="/image/${f.get_path()}' for f in entries])
+    return render_template('simple-flow-gallery.html', entries=entries)
 
 
 @app.route('/image-preview/<path:filepath>')
@@ -21,4 +21,5 @@ def image_preview(filepath):
 
 @app.route('/image/<path:filepath>')
 def image(filepath):
+    print(filepath)
     return send_from_directory(os.path.dirname(filepath), os.path.basename(filepath))

@@ -1,0 +1,8 @@
+{% extends "flow-gallery.html" %}
+
+{% block entry_view %}
+    <div>
+        <img src="/image/{{ entry.get_path() }}" style="height:150px; width:auto;" />
+        <div>{{ entry.get_name() }}</div>
+    </div>
+{% endblock %}

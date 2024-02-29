@@ -1,3 +1,6 @@
+Program może importować obrazy ze specjalnego katalogu całymi albumami. Należy wtedy wskazać rozdział do 
+którego dane zostaną wciągnięte.
+
 Pełna wymuszona obsługa tagowania (każdy obraz ma mieć wskazaną obecność bądź nieobecność każdego taga).
 W przypadku dodania tagu te obrazy które nie zostaną ztagowane automatychnie muszą być sklasyfikowane.
 Tagowanie wielopoziomowe (tagi do tagów, np. tag las ma zawierać również tag na zewnątrz, tag poni zawiera tag zwierze ...)
