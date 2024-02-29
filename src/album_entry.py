@@ -11,8 +11,8 @@ IMAGE_ENTRY = 'IMAGE'
 class AlbumEntry:
     def __init__(self, file_path, metadata_json_file):
         print(f'Entry found {file_path}')
-        if os.path.isfile(file_path):
-            raise Exception("File path not exists!")
+        if not os.path.isfile(file_path):
+            raise Exception(f'File path "{file_path}" not exists!')
 
         self.file_path = file_path
         self.metadata_json_file = metadata_json_file
@@ -41,7 +41,7 @@ class AlbumEntry:
 
 
     def is_generic(self):
-        return self.metadata_json_file.get_data()['type'] == GENERIC_ENTRY
+        return self.metadata_json_file.get_data()[self.file_path]['type'] == GENERIC_ENTRY
 
 
     # def get_preview(self):

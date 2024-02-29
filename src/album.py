@@ -7,8 +7,13 @@ class Album:
     def __init__(self, album_path):
         print(f'Loading album {album_path}')
         metadata_json_file = JsonFile(os.path.join(album_path, '.metadata'))
-        entries = (AlbumEntry(os.path.join(album_path, path) , metadata_json_file) for path in os.listdir(album_path) if os.path.isfile(path))
-        self.entries = (e for e in entries if not e.is_generic())
+        entries = []
+        for name in os.listdir(album_path):
+            if name != '.metadata':
+                entry_path = os.path.join(album_path, name)
+                if os.path.isfile(entry_path):
+                    entries.append(AlbumEntry(entry_path, metadata_json_file))
+        self.entries = [e for e in entries if not e.is_generic()]
 
 
     def get_entries(self, search_condition):
