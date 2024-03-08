@@ -1,20 +1,11 @@
 <html>
     <head>
         <title>Home Ai Gallery</title>
-        <script>
-            async function add_branch() {
-                const new_branch = document.getElementById('new_branch').value;
-                await fetch(`/branch/add/${encodeURIComponent(new_branch)}`);
-            }
-        </script>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/config.css')}}"/>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}"/>
+        {% block scripts %}{% endblock %}
     </head>
     <body>
-        <div style="display: flex; flex-direction: row;">
-            <span>
-                <input id="new_branch" type="text"/>
-                <button onclick="add_branch()">Add branch</button>
-            </span>
-        </div>
-        {% block gallery scoped %}{{ entries }}{% endblock %}
+        {% block main %}{% endblock %}
     </body>
 </html>

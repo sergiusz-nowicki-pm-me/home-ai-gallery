@@ -1,0 +1,19 @@
+body {
+    font-size: 1vw;
+}
+
+
+.heading1 {
+    font-size: 2em;
+}
+
+
+.heading2 {
+    font-size: 1.5em;
+}
+
+
+.heading3 {
+    font-size: 1.3em;
+    font-weight: 600;
+}

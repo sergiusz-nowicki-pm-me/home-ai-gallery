@@ -1,0 +1,73 @@
+{% extends "index.html" %} 
+
+{% block scripts %}
+<script>
+    function config_branches_add() {
+        const path = document.getElementById("new_branch_path").value;
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            if (this.responseText === 'ok')
+              load_config_branches();
+            else
+              alert(this.responseText)
+        }
+        xhttp.open("GET", "{{ url_for('config_branches_add', path='') }}" + path, true);
+        xhttp.send();
+    }
+
+
+    function config_branches_remove(md5) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            if (this.responseText === 'ok')
+              load_config_branches();
+            else
+              alert(this.responseText)
+        }
+        xhttp.open("GET", "{{ url_for('config_branches_remove', md5='') }}" + md5, true);
+        xhttp.send();
+    }
+
+
+    function load_config_branches() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            show_branches(JSON.parse(this.responseText))
+        }
+        xhttp.open("GET", "{{ url_for('config_branches') }}", true);
+        xhttp.send();        
+    }
+
+
+    function show_branches(branches) {
+      document.getElementById("branches").innerHTML = branches.map(
+        (b) => {
+          return "<div class=\"row width-100prc\">" +
+            "<span class=\"width-100prc\">" + b.path + "</span>" +
+            "<button onClick=\"config_branches_remove('" + b.md5 + "')\">Delete</button>" +
+          "</div>";
+        }
+      ).reduce(
+        (res, b) => {
+          return res + b;
+        }
+      );
+    }
+
+
+    load_config_branches();
+</script>
+{% endblock %}
+
+{% block main %}
+<div class="column width-100em">
+    <div class="heading3">Branches</div>
+    <div class="row">
+        <input class="width-100prc" id="new_branch_path" type="text" />
+        <button onclick="config_branches_add()">Add&nbsp;branch</button>
+    </div>
+    <div id="branches" class="column width-100prc">
+
+    </div>
+</div>
+{% endblock %}

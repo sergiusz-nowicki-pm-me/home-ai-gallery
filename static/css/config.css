@@ -1,0 +1,18 @@
+div.column {
+    background-color: rgb(225, 195, 255);
+    display: flex;
+    flex-direction: column;
+}
+
+div.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.width-100em {
+    width: 20em;
+}
+
+.width-100prc {
+    width: 100%;
+}
