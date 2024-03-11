@@ -33,28 +33,21 @@ def config_branches_remove():
 
 
 @app.route('/list')
-def index():
+def list():
     path = request.args.get('path')
 
-    dirs = []
-    files = []
-    if path != '.':
+    dirs = [(b['path'], b['path']) for b in Config().branches().get_all()]
+    for dir in dirs:
+            
+    if path != None:
         path_items = os.listdir(path)
-        dirs = [path for path in path_items if os.path.isdir(os.path.join(path, path_items))]
-        files = [path for path in path_items if os.path.isfile(os.path.join(path, path_items))]
-    else:
-        dirs = [b['path'] for b in Config().branches().get_all()]
+        dirs = [(item, os.path.join(path, item)) for item in path_items if os.path.isdir(os.path.join(path, item))]
+        files = [(item, os.path.join(path, item)) for item in path_items if os.path.isfile(os.path.join(path, item))]
 
-    
-    return render_template()
-    # with sqlite3.connect('./config/test.db') as db:
-    #     gallery = Gallery(db)
-    #     entries = []
-    #     print(entries)
-    #     return render_template('column-gallery.html', entries=entries)
+    return render_template('list.html', dir_items=dirs, file_items=files, )
 
 
-@app.route('/image/<path:filepath>')
+@app.route('/file/<path:filepath>')
 def image(filepath):
     return send_from_directory(os.path.dirname(filepath), os.path.basename(filepath))
 

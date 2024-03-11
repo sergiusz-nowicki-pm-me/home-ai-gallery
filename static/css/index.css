@@ -2,6 +2,11 @@ body {
     font-size: 1vw;
 }
 
+.column {
+    background-color: rgb(225, 195, 255);
+    display: flex;
+    flex-direction: column;
+}
 
 .heading1 {
     font-size: 2em;
@@ -16,4 +21,23 @@ body {
 .heading3 {
     font-size: 1.3em;
     font-weight: 600;
+}
+
+.multirow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.width-100em {
+    width: 20em;
+}
+
+.width-100prc {
+    width: 100%;
 }

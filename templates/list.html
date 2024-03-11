@@ -1,0 +1,25 @@
+{% extends "index.html" %} 
+
+{% block scripts %}
+<script>
+</script>
+{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="column width-100em">
+        <!-- <a href=" {{url_for('list', path=ret) }}">..</a> -->
+        {% for dir_item in dir_items %}
+            <a href=" {{url_for('list', path=dir_item[1], ret=path) }}">{{dir_item[0]}}</a>
+        {% endfor %}
+    </div>
+
+    <div class="column width-100prc">
+        <div class="multirow width-100prc">
+            {% for file_item in file_items %}
+            <a href="/file/{{file_item[1]}}">{{file_item[0]}}</span>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
